@@ -47,6 +47,18 @@ app.MapGet("/information", async(Context db) =>
     return Results.Ok(informations);
 });
 
+app.MapDelete("/information/{id:guid}", async (Guid id, Context db) =>
+{
+    var information = await db.Information.FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+    if (information is null) return Results.NotFound();
+
+    db.Information.Remove(information);
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+
 
 app.UseCors("Dev");
 
