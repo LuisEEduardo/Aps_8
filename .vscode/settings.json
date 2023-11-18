@@ -1,0 +1,5 @@
+{
+  "appService.preDeployTask": "publish-release",
+  "appService.deploySubpath": "Aps.Api\\bin\\Release\\net7.0\\publish",
+  "appService.defaultWebAppToDeploy": "/subscriptions/ecd862f2-5215-4d2c-a3bf-addcf618efce/resourceGroups/teste/providers/Microsoft.Web/sites/aps-dev-teste"
+}
