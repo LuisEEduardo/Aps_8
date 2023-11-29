@@ -11,7 +11,7 @@ builder.Services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("aps_db"))
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Dev", 
+    options.AddPolicy("Dev",
         builder =>
             builder
                 .AllowAnyMethod()
@@ -29,7 +29,7 @@ app.UseHttpsRedirection();
 
 app.MapPost("/information", async (InformationRequest informationRequest, Context db) =>
 {
-    var information = Information.CreateInformation(informationRequest.Title, informationRequest.Local, informationRequest.Local, informationRequest.Image);
+    var information = Information.CreateInformation(informationRequest.Title, informationRequest.Description, informationRequest.Local, informationRequest.Image);
     db.Information.Add(information);
     await db.SaveChangesAsync();
 
@@ -38,7 +38,7 @@ app.MapPost("/information", async (InformationRequest informationRequest, Contex
 .Produces<InformationRequest>()
 .WithOpenApi();
 
-app.MapGet("/information", async(Context db) =>
+app.MapGet("/information", async (Context db) =>
 {
     var informations = await db.Information.ToListAsync();
 
